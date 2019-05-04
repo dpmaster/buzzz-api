@@ -1,0 +1,21 @@
+{
+    "name": "buzzz/api",
+    "description": "Fast api",
+    "keywords": [
+        "php api"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Buzzz\\Api\\": "src/"
+        }
+    },
+    "scripts": {
+    }
+}
