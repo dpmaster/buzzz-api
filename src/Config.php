@@ -9,7 +9,7 @@ class Config {
     private $controller_suffix = "Controller";
     private $action_suffix = "Action";
 
-    public function __construct($config)
+    public function __construct($config = [])
     {
         if (isset($config['pattern'])) $this->pattern = $config['pattern'];
         if (isset($config['controller_namespace'])) $this->controller_namespace = $config['controller_namespace'];

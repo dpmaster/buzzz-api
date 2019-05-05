@@ -25,8 +25,9 @@ class Parser {
 
     public function parseUrl($url)
     {
-        $uri_data = explode("/", $url);
-        $pattern_data =  explode('/', $this->config->getPattern());
+        $parsed = parse_url($url);
+        $uri_data = explode("/", trim($parsed['path'], ' /'));
+        $pattern_data =  explode('/', trim($this->config->getPattern(), ' /'));
         $data = [];
 
         for ($i = 0; $i < count($uri_data); $i++) {
