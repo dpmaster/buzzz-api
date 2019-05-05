@@ -1,6 +1,10 @@
 Buzzz api
 =========
 
+Skeleton
+--------
+https://github.com/dpmaster/buzzz-api-skeleton
+
 Install
 -------
 ```
