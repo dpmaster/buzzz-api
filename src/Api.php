@@ -26,7 +26,7 @@ class Api
                 $data = $parser->parseUrl($_SERVER['REQUEST_URI']);
                 $params = isset($data['params']) ? $data['params'] :[];
                 try {
-                    $result = $this->execute($data['class'], $data['method'], $this->getRequestData(), $params);
+                    $result = $this->execute($data['class'], $data['method'], $this->getRequestData(), $params, $config);
                     return new Response($result);
                 } catch (\Throwable $e) {
                     return new Response(['error' => $e->getMessage()]);
@@ -40,9 +40,19 @@ class Api
         return new Response(['error' => 'Undefined controller']);
     }
 
-    private function execute($class_name, $method_name, $request_data = null, $params = []) {
+    private function execute($class_name, $method_name, $request_data = null, $params = [], Config $config = null) {
         if (!$request_data) $request_data = [];
         $instance = new $class_name();
+
+        if($config) {
+            //Test get, post, put ... actions
+            $request_method = substr($method_name,0, -strlen($config->getActionSuffix())) . ucfirst(strtolower($_SERVER['REQUEST_METHOD'])) . $config->getActionSuffix();
+
+            if(method_exists($instance, $request_method)) {
+                $method_name = $request_method;
+            }
+        }
+
         if (!method_exists($instance, $method_name)) {
             throw new \Exception('Undefined action');
         }
