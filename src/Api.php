@@ -41,7 +41,7 @@ class Api
     }
 
     private function execute($class_name, $method_name, $request_data = null, $params = []) {
-        if (!$request_data) $request_data = new stdClass();
+        if (!$request_data) $request_data = [];
         $instance = new $class_name();
         if (!method_exists($instance, $method_name)) {
             throw new \Exception('Undefined action');
