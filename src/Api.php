@@ -51,7 +51,7 @@ class Api
 
     private function getRequestData() {
         $data               = file_get_contents("php://input");
-        $dataJsonDecode     = json_decode($data) ?: (object) $_REQUEST;
+        $dataJsonDecode     = json_decode($data, true) ?: $_REQUEST;
         return $dataJsonDecode;
     }
 }
